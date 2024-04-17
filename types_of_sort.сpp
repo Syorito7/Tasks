@@ -1,0 +1,29 @@
+#include <iostream>
+
+
+template <typename T>
+void bubble_sorting(T* arr, size_t arr_size)
+{
+	for (size_t i = 0; i < arr_size; ++i)
+	{
+		for (size_t j = 0; j < arr_size-1; ++j)
+		{
+			if (arr[j]<arr[j+1])
+			{
+				T tmp_value = arr[j];
+				arr[j] = arr[j+1];
+				arr[j+1] = tmp_value;
+			}
+		}
+	}
+}
+
+template <typename T>
+void print_arr (T* arr, size_t arr_size)
+{
+	for (size_t i = 0; i < arr_size; ++i)
+	{
+		std::cout << arr[i] << ' ';
+	}
+	std::cout << endl;
+}
