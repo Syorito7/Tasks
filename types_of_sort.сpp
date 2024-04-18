@@ -8,7 +8,7 @@ void bubble_sorting(T* arr, size_t arr_size, bool flag = false)
 	{
 		for (size_t j = 0; j < arr_size-1; ++j)
 		{
-			if ((arr[j]>arr[j+1])&&(flag == false)) || (arr[j]<arr[j+1])&&(flag == true))
+			if (((arr[j]>arr[j+1])&&(flag == false)) ||((arr[j]<arr[j+1])&&(flag == true)))
 			{
 				T tmp_value = arr[j];
 				arr[j] = arr[j+1];
@@ -18,7 +18,7 @@ void bubble_sorting(T* arr, size_t arr_size, bool flag = false)
 	}
 }
 
-template <typaname T>
+template <typename T>
 void merge_sorting(T* arr, size_t start, size_t end)
 {
 	if (end - start < 2)
@@ -30,37 +30,43 @@ void merge_sorting(T* arr, size_t start, size_t end)
 		if (arr[start] > arr[end])
 		{
 			T tmp_value = arr[start];
-			arr[start] = arr[end];
-			arr[end] = tmp_value;
+			arr[start] = arr[end-1];
+			arr[end-1] = tmp_value;
 		}
 		return;
 	}
-	merge_sorting(arr, start, start + (end - start) / 2);
-	merge_sorting(arr, start + (end - start) / 2, end);
-
-	// combining the halves
-	//T* new_arr = T[]
-	size_t b1 = start;
 	size_t el = start + (end - start) / 2;
-	size_t b2 = el;
-	for (size_t i = 0; i < end - start; ++i)
+    merge_sorting(arr, start, el);
+	merge_sorting(arr, el, end);
+	// combining the halves
+	T* new_arr = new T[end-start];
+	size_t i = start;
+	size_t j = el;
+	size_t k = 0;
+	while ((i < el)&&(j < end))
 	{
-		if ((b1 >= el) || (b2 < end) && (arr[b2]<=arr[b1]))
-		{
-			new_arr[i] = arr[b2];
-			++b2;
-		}
-		else
-		{
-			new_arr[i] = arr[b1];
-			++b1;
-		}
+	    if (arr[i] <= arr[j])
+	    {
+	        new_arr[k++] = arr[i++];
+	    }
+	    else
+	    {
+	        new_arr[k++] = arr[j++];
+	    }
 	}
-	for (size_t i = 0; i < end - start; ++i)
+	while (i < el)
 	{
-		arr[i+start] = arr_new[i];
+	    new_arr[k++] = arr[i++];
 	}
-	delete[] arr_new;
+	while (j < end)
+	{
+	    new_arr[k++] = arr[j++];
+	}
+	for (size_t i = 0; i < k; ++i)
+	{
+		arr[start + i] = new_arr[i];
+	}
+	delete[] new_arr;
 }
 
 template <typename T>
