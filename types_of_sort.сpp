@@ -19,6 +19,36 @@ void bubble_sorting(T* arr, size_t arr_size, bool flag = false)
 }
 
 template <typename T>
+void quick_sorting(T* arr, size_t start, size_t end)
+{
+	if (start >= end)
+	{
+		return;
+	}
+	size_t current = start;
+	size_t pivotIndex = start + (rand() % (end - start + 1));
+	T pivotValue = arr[pivotIndex];
+	std::swap(arr[start], arr[pivotIndex]);
+	for (size_t i = start + 1; i <=end; ++i)
+	{
+		if (arr[i] < arr[start])
+		{
+			++current;
+			std::swap(arr[i],arr[current]);
+		}
+	}
+	std::swap(arr[start],arr[current]);
+	if (current > start)
+	{
+		quick_sorting(arr,start,current - 1); // sort on left
+	}
+	if (end >= current + 1)
+	{
+		quick_sorting(arr,current + 1, end); // sort on right
+	}
+}
+
+template <typename T>
 void merge_sorting(T* arr, size_t start, size_t end)
 {
 	if (end - start < 2)
