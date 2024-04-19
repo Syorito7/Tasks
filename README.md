@@ -8,6 +8,8 @@
 ___
 ## Participation in projects
 - [x] [Protocol recognition](https://github.com/Alex-Karma/ML_Project/tree/main) and [Documentation](https://github.com/Syorito7/Tasks/tree/main/HSE/Course_1/My_project)
+- [x] [Combination Circuit Generator - version 2022/2023](https://git.miem.hse.ru/1290/1290_project)
+- [ ] [Combination Circuit Generator - version 2022/2024](https://github.com/vvzunin/CircuitGen_Generator)
 
 ***Bubble***
 
