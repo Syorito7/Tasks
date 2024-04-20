@@ -14,8 +14,8 @@ ___
 
 ---
 ## Achievements
-- [Конференция Арменского 2024]()
-- 
+- [Conference 2024](https://github.com/Syorito7/Tasks/tree/main/Achievements/Conference%202024)
+
 
 ***Bubble***
 
