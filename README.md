@@ -18,17 +18,15 @@ ___
 
 ## Skills
 ### [C](https://github.com/Syorito7/Tasks/tree/main/HSE/Course_1/C)
----
 - Basic knowledge of algorithms and data structures
 - Pointers
 - Files (bin and txt)
 - [***Favorite project - database***](https://github.com/Syorito7/Tasks/tree/main/HSE/Course_1/C/Lab_Type_%E2%84%9611)
+---
 ### [C++](https://github.com/Syorito7/Tasks/tree/main/HSE/Course_2/C%2B%2B)
 - Basic knowledge of algorithms and data structures
 - Object oriented programming
 - SFML
 - STL
 - [***Favorite project - Pacman***](https://github.com/Syorito7/Tasks/tree/main/HSE/Course_2/C%2B%2B/Laba_4)
-***Bubble***
-
-:white_check_mark:
+---
