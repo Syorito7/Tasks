@@ -1,0 +1,9 @@
+WindowKeeper.h - ОК
+State.h - Не ОК. Исправлено!
+Menu.h - ОК
+Maze.h - ОК
+GameContext.h - ОК
+GameBuilder.h - Не ОК (белый экран). Hard - работает, в остальных - исключения. Исправлено!
+Config.h - ОК
+Comand.h - ОК
+Application.h - ОК

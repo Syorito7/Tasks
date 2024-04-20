@@ -1,0 +1,34 @@
+﻿  main.cpp
+C:\Users\Индюченко Никита\laba_4_packman\Laba_4\Laba_4\Menu.h(51,1): warning C4267: аргумент: преобразование из "size_t" в "unsigned int"; возможна потеря данных
+C:\Users\Индюченко Никита\laba_4_packman\Laba_4\Laba_4\State.h(73,61): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\Индюченко Никита\laba_4_packman\Laba_4\Laba_4\State.h(73,40): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\Индюченко Никита\laba_4_packman\Laba_4\Laba_4\GameBuilder.h(37,17): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
+C:\Users\Индюченко Никита\laba_4_packman\Laba_4\Laba_4\GameBuilder.h(89,15): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
+C:\Users\Индюченко Никита\laba_4_packman\Laba_4\Laba_4\GameBuilder.h(90,16): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
+C:\Users\Индюченко Никита\laba_4_packman\Laba_4\Laba_4\GameBuilder.h(150,15): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
+C:\Users\Индюченко Никита\laba_4_packman\Laba_4\Laba_4\GameBuilder.h(151,16): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
+C:\Users\Индюченко Никита\laba_4_packman\Laba_4\Laba_4\GameBuilder.h(239,115): warning C4244: аргумент: преобразование "unsigned int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\Индюченко Никита\laba_4_packman\Laba_4\Laba_4\GameBuilder.h(239,71): warning C4244: аргумент: преобразование "unsigned int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\Индюченко Никита\laba_4_packman\Laba_4\Laba_4\GameBuilder.h(240,251): warning C4244: аргумент: преобразование "const unsigned int" в "float", возможна потеря данных
+C:\Users\Индюченко Никита\laba_4_packman\Laba_4\Laba_4\GameBuilder.h(240,220): warning C4244: аргумент: преобразование "const unsigned int" в "float", возможна потеря данных
+C:\Users\Индюченко Никита\laba_4_packman\Laba_4\Laba_4\GameBuilder.h(244,255): warning C4244: аргумент: преобразование "const unsigned int" в "float", возможна потеря данных
+C:\Users\Индюченко Никита\laba_4_packman\Laba_4\Laba_4\GameBuilder.h(244,224): warning C4244: аргумент: преобразование "const unsigned int" в "float", возможна потеря данных
+C:\Users\Индюченко Никита\laba_4_packman\Laba_4\Laba_4\GameBuilder.h(248,252): warning C4244: аргумент: преобразование "const unsigned int" в "float", возможна потеря данных
+C:\Users\Индюченко Никита\laba_4_packman\Laba_4\Laba_4\GameBuilder.h(248,221): warning C4244: аргумент: преобразование "const unsigned int" в "float", возможна потеря данных
+  Laba_4.vcxproj -> C:\Users\Индюченко Никита\laba_4_packman\Laba_4\x64\Debug\Laba_4.exe
