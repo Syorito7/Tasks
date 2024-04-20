@@ -28,7 +28,7 @@ ___
 - Object oriented programming
 - SFML
 - STL
-- [***Favorite project - Pacman***]()
+- [***Favorite project - Pacman***](https://github.com/Syorito7/Tasks/tree/main/HSE/Course_2/C%2B%2B/Laba_4)
 ***Bubble***
 
 :white_check_mark:
