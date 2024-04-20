@@ -11,6 +11,12 @@ ___
 - [x] [Combination Circuit Generator - version 2022/2023](https://git.miem.hse.ru/1290/1290_project)
 - [ ] [Combination Circuit Generator - version 2022/2024](https://github.com/vvzunin/CircuitGen_Generator)
 
+
+---
+## Achievements
+- [Конференция Арменского 2024]()
+- 
+
 ***Bubble***
 
 :white_check_mark:
