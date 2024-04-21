@@ -30,3 +30,7 @@ ___
 - STL
 - [***Favorite project - Pacman***](https://github.com/Syorito7/Tasks/tree/main/HSE/Course_2/C%2B%2B/Laba_4)
 ---
+### Doxygen
+- Description of classes, methods, functions, namespace written in C++ to generate documentation in html format
+- Using Graphviz utility to visualize classes and create UML diagrams for objects
+- An example based on the [Combination Circuit](https://github.com/vvzunin/CircuitGen_Generator) project
