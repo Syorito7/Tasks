@@ -1,4 +1,4 @@
-<mxfile host="Electron" modified="2024-05-21T20:18:18.215Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.2.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="hYaBXUarnHi6ytOBlofD" version="24.2.5" type="device">
+<mxfile host="Electron" modified="2024-05-22T10:11:06.285Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.2.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="wH3pOO-iQwQCAqXtDcfS" version="24.2.5" type="device">
   <diagram id="R2lEEEUBdFMjLlhIrx00" name="Page-1">
     <mxGraphModel dx="1504" dy="931" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
       <root>
@@ -815,6 +815,18 @@
               <mxPoint x="900" y="345" />
             </Array>
           </mxGeometry>
+        </mxCell>
+        <mxCell id="TbvRz3n0D3rXLw43wtIC-280" value="&lt;b&gt;Требования нормальной формы:&lt;/b&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="765" y="810" width="220" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="TbvRz3n0D3rXLw43wtIC-281" value="&lt;b&gt;Для первой:&lt;br&gt;&lt;/b&gt;1. Атомарные значения: Каждая ячейка в таблице&lt;div&gt;должна содержать одно значение, которое является неделимым&lt;/div&gt;&lt;div&gt;2. Уникальные имена столбцов&lt;/div&gt;&lt;div&gt;3. Уникальные строки&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="750" y="825" width="390" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="TbvRz3n0D3rXLw43wtIC-282" value="&lt;b&gt;Для второй:&lt;br&gt;&lt;/b&gt;1. Удовлетворяет первой&lt;div&gt;2. Все неключевые атрибуты должны зависеть от каждого&lt;/div&gt;&lt;div&gt;компонента составного первичного ключа&lt;/div&gt;&lt;div&gt;3. Каждый неключевой атрибут должен зависисеть только&lt;/div&gt;&lt;div&gt;от первичного ключа, а не от какой-то его части&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="750" y="915" width="350" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="TbvRz3n0D3rXLw43wtIC-283" value="&lt;b&gt;Для третей:&lt;/b&gt;&lt;div&gt;1. Удовлетворяет второй&lt;/div&gt;&lt;div&gt;2. X-&amp;gt;Y-&amp;gt;Z. Не должно быть транзитивных зависимостей, то есть если&lt;/div&gt;&lt;div&gt;Y зависит от X, а Z зависит от Y, то Z не должен зависеть от других&lt;/div&gt;&lt;div&gt;&amp;nbsp;атрибутов, кроме Y&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="749" y="1015" width="420" height="90" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
