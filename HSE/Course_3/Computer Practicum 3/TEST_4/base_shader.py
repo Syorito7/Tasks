@@ -84,6 +84,10 @@ class BaseShader:
         inner_radius_3 = 0.3
         outer_radius_3 = 0.4
 
+        # Установите четвертую пару внутренних и внешних радиусов кольца
+        inner_radius_4 = 0.4
+        outer_radius_4 = 0.5
+
         '''
         
         # Если расстояние между внутренним и внешним радиусом, меняем цвет в зависимости от времени
@@ -99,31 +103,58 @@ class BaseShader:
         # Вычисление угла относительно центра окружности
         angle = ti.atan2(uv.y, uv.x)
 
+        # Цвета для градиента в каждом сегменте
+        color_segment_1_start = ts.vec3(1.0, 0.0, 0.0)  # Красный
+        color_segment_1_end = ts.vec3(0.0, 0.0, 1.0)  # Синий
+
+        color_segment_2_start = ts.vec3(0.0, 1.0, 0.0)  # Зеленый
+        color_segment_2_end = ts.vec3(1.0, 1.0, 0.0)  # Желтый
+
+        color_segment_3_start = ts.vec3(1.0, 1.0, 1.0)  # Белый
+        color_segment_3_end = ts.vec3(0.0, 0.0, 0.0)  # Черный
+
+        color_segment_4_start = ts.vec3(0.0, 1.0, 1.0)  # Бирюзовый
+        color_segment_4_end = ts.vec3(1.0, 0.0, 1.0)  # Пурпурный
 
         # Проверка, находится ли точка внутри первого сегмента дуги
-        if inner_radius_1 < dist < outer_radius_1 and 0 + (t / 1.1) < angle < ti.pi * 2 + (t / 1.1):
-            # Меняем цвет в зависимости от времени t
-            col = ts.vec3(skewsin(t * self.time_scale, 0.1), skewsin(t * self.time_scale + 2, 0.1),
-                          skewsin(t * self.time_scale + 4, 0.1))
+        if inner_radius_1 < dist < outer_radius_1 and 0 + 1.2 * (t / 1.1) < angle < ti.pi * 2 + (t / 1.1):
+            # Вычисляем коэффициент интерполяции для градиента
+            gradient_factor = (angle - (0 + (t / 1.1))) / ((ti.pi * 2 + (t / 1.1)) - (0 + (t / 1.1)))
+            # Линейная интерполяция между начальным и конечным цветом сегмента
+            col = ts.mix(color_segment_1_start, color_segment_1_end, gradient_factor)
 
         # Проверка, находится ли точка внутри второго сегмента дуги
-        elif inner_radius_2 < dist < outer_radius_2 and -ti.pi + (t / 1.1) < angle < 0 + (t / 1.1):
-            # Меняем цвет в зависимости от времени t
-            col = ts.vec3(skewsin(t * self.time_scale + 1, 0.1), skewsin(t * self.time_scale + 3, 0.1),
-                          skewsin(t * self.time_scale + 5, 0.1))
+        elif inner_radius_2 < dist < outer_radius_2 and -ti.pi + 1.3 * (t / 1.1) < angle < 0 + (t / 1.1):
+            # Вычисляем коэффициент интерполяции для градиента
+            gradient_factor = (angle - (-ti.pi + (t / 1.1))) / ((0 + (t / 1.1)) - (-ti.pi + (t / 1.1)))
+            # Линейная интерполяция между начальным и конечным цветом сегмента
+            col = ts.mix(color_segment_2_start, color_segment_2_end, gradient_factor)
 
         # Проверка, находится ли точка внутри третьего сегмента дуги
-        elif inner_radius_3 < dist < outer_radius_3 and -ti.pi / 2 + (t / 1.1) < angle < ti.pi / 2 + (t / 1.1):
-            # Меняем цвет в зависимости от времени t
-            col = ts.vec3(skewsin(t * self.time_scale + 1, 0.1), skewsin(t * self.time_scale + 4, 0.1),
-                          skewsin(t * self.time_scale + 6, 0.1))
-        # Проверка, находится ли точка внутри третьего сегмента дуги
-        elif not (inner_radius_1 < dist < outer_radius_1 and 0 + (t / 1.1) < angle < ti.pi * 2 + (t / 1.1)) and \
-                not (inner_radius_2 < dist < outer_radius_2 and -ti.pi + (t / 1.1) < angle < 0 + (t / 1.1)) and \
-                not (inner_radius_3 < dist < outer_radius_3 and -ti.pi / 2 + (t / 1.1) < angle < ti.pi / 2 + (t / 1.1)):
+        elif inner_radius_3 < dist < outer_radius_3 and -ti.pi / 2 + 1.4 * (t / 1.1) < angle < ti.pi / 2 + (t / 1.1):
+            # Вычисляем коэффициент интерполяции для градиента
+            gradient_factor = (angle - (-ti.pi / 2 + (t / 1.1))) / ((ti.pi / 2 + (t / 1.1)) - (-ti.pi / 2 + (t / 1.1)))
+            # Линейная интерполяция между начальным и конечным цветом сегмента
+            col = ts.mix(color_segment_3_start, color_segment_3_end, gradient_factor)
+        #
+        # Проверка, находится ли точка внутри четвертого сегмента дуги
+        if inner_radius_4 < dist < outer_radius_4 and -ti.pi + 1.4 * (t / 1.1) < angle < 0 + (t / 1.1):
+            # Вычисляем коэффициент интерполяции для градиента
+            gradient_factor = (angle - (-ti.pi / 2 + (t / 1.1))) / ((ti.pi / 2 + (t / 1.1)) - (-ti.pi / 2 + (t / 1.1)))
+            # Линейная интерполяция между начальным и конечным цветом сегмента
+            col = ts.mix(color_segment_4_start, color_segment_4_end, gradient_factor)
+
+
+
+        #
+        elif not (inner_radius_1 < dist < outer_radius_1 and 0 + 1.2 * (t / 1.1) < angle < ti.pi * 2 + (t / 1.1)) and \
+                not (inner_radius_2 < dist < outer_radius_2 and -ti.pi + 1.2 * (t / 1.1) < angle < 0 + (t / 1.1)) and \
+                not (inner_radius_3 < dist < outer_radius_3 and -ti.pi / 2 + 1.2 * (t / 1.1) < angle < ti.pi / 2 + (t / 1.1)):
             # Действия, выполняемые в случае, если угол не принадлежит ни одному промежутку
             col = ts.vec3(0.0, 0.0, 0.0)  # Устанавливаем цвет в черный
             t = 0
+
+
 
 
         return col
@@ -141,6 +172,9 @@ class BaseShader:
                     break
 
             t = time.time() - start  # пересчет времени, прошедшего с первого кадра
+            if t >= 5.6:  # Если прошло 5.6 секунд, сбросить время
+                start = time.time()  # Сбросить начальное время
+                t = 0  # Сбросить текущее время
             self.render(t)  # расчет цветов пикселей
             gui.set_image(self.pixels)  # перенос пикселей из поля pixels в буфер кадра
             gui.show()
