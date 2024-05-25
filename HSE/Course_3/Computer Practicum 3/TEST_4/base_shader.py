@@ -2,7 +2,7 @@ import taichi as ti
 import taichi_glsl as ts
 import time
 # Добавляем функции из core.py
-from core import length, skewsin
+from core import length, skewsin, smooth_edge
 
 
 
@@ -116,33 +116,53 @@ class BaseShader:
         color_segment_4_start = ts.vec3(0.0, 1.0, 1.0)  # Бирюзовый
         color_segment_4_end = ts.vec3(1.0, 0.0, 1.0)  # Пурпурный
 
+        # Функция для плавного закругления границ сегментов
+        edge_smoothness = 0.02
+
         # Проверка, находится ли точка внутри первого сегмента дуги
         if inner_radius_1 < dist < outer_radius_1 and 0 + 1.2 * (t / 1.1) < angle < ti.pi * 2 + (t / 1.1):
             # Вычисляем коэффициент интерполяции для градиента
             gradient_factor = (angle - (0 + (t / 1.1))) / ((ti.pi * 2 + (t / 1.1)) - (0 + (t / 1.1)))
+            # Увеличиваем скорость изменения
+            gradient_factor *= 2
             # Линейная интерполяция между начальным и конечным цветом сегмента
             col = ts.mix(color_segment_1_start, color_segment_1_end, gradient_factor)
+            col *= smooth_edge(dist, inner_radius_1 - edge_smoothness,
+                               inner_radius_1)  # Плавный переход к внешнему радиусу
+            col *= smooth_edge(outer_radius_1 + edge_smoothness, dist, outer_radius_1)
 
         # Проверка, находится ли точка внутри второго сегмента дуги
         elif inner_radius_2 < dist < outer_radius_2 and -ti.pi + 1.3 * (t / 1.1) < angle < 0 + (t / 1.1):
             # Вычисляем коэффициент интерполяции для градиента
             gradient_factor = (angle - (-ti.pi + (t / 1.1))) / ((0 + (t / 1.1)) - (-ti.pi + (t / 1.1)))
+            # Увеличиваем скорость изменения
+            gradient_factor *= 2  # Например, умножим на 2
             # Линейная интерполяция между начальным и конечным цветом сегмента
             col = ts.mix(color_segment_2_start, color_segment_2_end, gradient_factor)
+            col *= smooth_edge(dist, inner_radius_2 - edge_smoothness, inner_radius_2)
+            col *= smooth_edge(outer_radius_2 + edge_smoothness, dist, outer_radius_2)
 
         # Проверка, находится ли точка внутри третьего сегмента дуги
         elif inner_radius_3 < dist < outer_radius_3 and -ti.pi / 2 + 1.4 * (t / 1.1) < angle < ti.pi / 2 + (t / 1.1):
             # Вычисляем коэффициент интерполяции для градиента
             gradient_factor = (angle - (-ti.pi / 2 + (t / 1.1))) / ((ti.pi / 2 + (t / 1.1)) - (-ti.pi / 2 + (t / 1.1)))
+            # Увеличиваем скорость изменения
+            gradient_factor *= 2  # Например, умножим на 2
             # Линейная интерполяция между начальным и конечным цветом сегмента
             col = ts.mix(color_segment_3_start, color_segment_3_end, gradient_factor)
+            col *= smooth_edge(dist, inner_radius_3 - edge_smoothness, inner_radius_3)
+            col *= smooth_edge(outer_radius_3 + edge_smoothness, dist, outer_radius_3)
         #
         # Проверка, находится ли точка внутри четвертого сегмента дуги
         if inner_radius_4 < dist < outer_radius_4 and -ti.pi + 1.4 * (t / 1.1) < angle < 0 + (t / 1.1):
             # Вычисляем коэффициент интерполяции для градиента
             gradient_factor = (angle - (-ti.pi / 2 + (t / 1.1))) / ((ti.pi / 2 + (t / 1.1)) - (-ti.pi / 2 + (t / 1.1)))
+            # Увеличиваем скорость изменения
+            gradient_factor *= 2  # Например, умножим на 2
             # Линейная интерполяция между начальным и конечным цветом сегмента
             col = ts.mix(color_segment_4_start, color_segment_4_end, gradient_factor)
+            col *= smooth_edge(dist, inner_radius_4 - edge_smoothness, inner_radius_4)
+            col *= smooth_edge(outer_radius_4 + edge_smoothness, dist, outer_radius_4)
 
 
 

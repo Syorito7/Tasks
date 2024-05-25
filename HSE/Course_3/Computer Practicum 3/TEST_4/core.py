@@ -157,3 +157,9 @@ def length(x):
     """
     return ti.sqrt(x @ x)
 
+
+@ti.func
+def smooth_edge(value, edge0, edge1):
+    # Функция сглаживания краев с использованием smoothstep
+    t = ts.clamp((value - edge0) / (edge1 - edge0), 0.0, 1.0)
+    return t * t * (3.0 - 2.0 * t)
