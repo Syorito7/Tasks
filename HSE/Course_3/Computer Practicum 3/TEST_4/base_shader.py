@@ -1,53 +1,154 @@
 import taichi as ti
 import taichi_glsl as ts
 import time
-# Добавляем функции из core.py
 from core import length, skewsin, smooth_edge
 
+@ti.data_oriented
+class Segment:
+    """
+    Класс, представляющий сегмент шейдера.
 
+    Атрибуты:
+        inner_radius (float): Внутренний радиус сегмента.
+        outer_radius (float): Внешний радиус сегмента.
+        start_color (ts.vec3): Начальный цвет сегмента.
+        end_color (ts.vec3): Конечный цвет сегмента.
+        angle_offset (float): Угловое смещение для сегмента.
+    """
+
+    def __init__(self, inner_radius, outer_radius, start_color, end_color, angle_offset):
+        """
+        Инициализирует новый сегмент.
+
+        Аргументы:
+            inner_radius (float): Внутренний радиус сегмента.
+            outer_radius (float): Внешний радиус сегмента.
+            start_color (ts.vec3): Начальный цвет сегмента.
+            end_color (ts.vec3): Конечный цвет сегмента.
+            angle_offset (float): Угловое смещение для сегмента.
+        """
+        self.inner_radius = inner_radius
+        self.outer_radius = outer_radius
+        self.start_color = start_color
+        self.end_color = end_color
+        self.angle_offset = angle_offset
+
+    @ti.func
+    def contains(self, dist, angle, t):
+        """
+        Определяет, находится ли заданная точка (расстояние и угол) внутри этого сегмента.
+
+        Аргументы:
+            dist (float): Расстояние от начала координат.
+            angle (float): Угол от положительной оси x.
+            t (float): Текущее время.
+
+        Возвращает:
+            bool: True, если точка находится внутри сегмента, иначе False.
+        """
+        start_angle = self.calculate_start_angle(t)
+        end_angle = self.calculate_end_angle(t)
+        return self.inner_radius < dist < self.outer_radius and start_angle < angle < end_angle
+
+    @ti.func
+    def calculate_start_angle(self, t):
+        """
+        Вычисляет начальный угол сегмента на основе текущего времени.
+
+        Аргументы:
+            t (float): Текущее время.
+
+        Возвращает:
+            float: Начальный угол сегмента.
+        """
+        return 0 + self.angle_offset + 1.2 * (t / 1.1)
+
+    @ti.func
+    def calculate_end_angle(self, t):
+        """
+        Вычисляет конечный угол сегмента на основе текущего времени.
+
+        Аргументы:
+            t (float): Текущее время.
+
+        Возвращает:
+            float: Конечный угол сегмента.
+        """
+        return self.angle_offset + ti.pi * 2 + (t / 1.1)
+
+    @ti.func
+    def get_color(self, dist, angle, t):
+        """
+        Вычисляет цвет в заданной точке (расстояние и угол) внутри сегмента.
+
+        Аргументы:
+            dist (float): Расстояние от начала координат.
+            angle (float): Угол от положительной оси x.
+            t (float): Текущее время.
+
+        Возвращает:
+            ts.vec3: Цвет в заданной точке.
+        """
+        gradient_factor = (angle - self.calculate_start_angle(t)) / (self.calculate_end_angle(t) - self.calculate_start_angle(t))
+        gradient_factor *= 2
+        color = ts.mix(self.start_color, self.end_color, gradient_factor)
+        edge_smoothness = 0.02
+        color *= smooth_edge(dist, self.inner_radius - edge_smoothness, self.inner_radius)
+        color *= smooth_edge(self.outer_radius + edge_smoothness, dist, self.outer_radius)
+        return color
 
 
 @ti.data_oriented
 class BaseShader:
     """
-        Класс BaseShader для рендеринга простых шейдеров с использованием Taichi и Taichi GLSL.
+    Класс, представляющий базовый шейдер.
 
-        Атрибуты:
-            title (str): Заголовок окна GUI.
-            res (tuple[int, int]): Разрешение окна, по умолчанию (1600, 900).
-            resf (ts.vec2): Векторное представление разрешения.
-            pixels (ti.Vector.field): Поле для хранения цветовых значений пикселей.
-            gamma (float): Значение гамма-коррекции, по умолчанию 2.2.
+    Атрибуты:
+        title (str): Название окна GUI.
+        res (tuple[int, int]): Разрешение окна GUI.
+        resf (ts.vec2): Разрешение в виде вектора.
+        pixels (ti.Vector.field): Данные пикселей для шейдера.
+        gamma (float): Значение гамма-коррекции.
+        time_scale (float): Масштабный коэффициент времени.
+        angle_scale (float): Масштабный коэффициент угла.
+        segments (list[Segment]): Список сегментов в шейдере.
     """
-    def __init__(self,
-                 title: str,
-                 res: tuple[int, int] | None = None,
-                 gamma: float = 2.2
-                 ):
-        """
-                Инициализирует класс BaseShader с заданными заголовком, разрешением и гамма-коррекцией.
 
-                Аргументы:
-                    title (str): Заголовок окна GUI.
-                    res (tuple[int, int], optional): Разрешение окна. По умолчанию (1600, 900).
-                    gamma (float): Значение гамма-коррекции. По умолчанию 2.2.
-                """
+    def __init__(self, title: str, res: tuple[int, int] = None, gamma: float = 2.2):
+        """
+        Инициализирует базовый шейдер.
+
+        Аргументы:
+            title (str): Название окна GUI.
+            res (tuple[int, int], optional): Разрешение окна GUI. По умолчанию (1280, 720).
+            gamma (float, optional): Значение гамма-коррекции. По умолчанию 2.2.
+        """
         self.title = title
         self.res = res if res is not None else (1280, 720)
         self.resf = ts.vec2(*self.res)
         self.pixels = ti.Vector.field(3, dtype=ti.f32, shape=self.res)
         self.gamma = gamma
-        self.time_scale = 0.5  # Масштаб времени для скорости движения дуги
-        self.angle_scale = 2.0  # Масштаб угла для скорости вращения дуги
+        self.time_scale = 0.5
+        self.angle_scale = 2.0
 
+        # Определяем угол смещения для каждого сегмента
+        angle_offsets = [-ti.pi, -ti.pi / 2, 0, ti.pi / 2, ti.pi]
+
+        self.segments = [
+            Segment(0.1, 0.2, ts.vec3(1.0, 0.0, 0.0), ts.vec3(0.0, 0.0, 1.0), angle_offsets[0]),
+            Segment(0.2, 0.3, ts.vec3(0.0, 1.0, 0.0), ts.vec3(1.0, 1.0, 0.0), angle_offsets[1]),
+            Segment(0.3, 0.4, ts.vec3(1.0, 1.0, 1.0), ts.vec3(0.0, 0.0, 0.0), angle_offsets[2]),
+            Segment(0.4, 0.5, ts.vec3(0.0, 1.0, 1.0), ts.vec3(1.0, 0.0, 1.0), angle_offsets[3]),
+            Segment(0.5, 0.6, ts.vec3(0.5, 0.5, 0.0), ts.vec3(0.0, 0.5, 0.5), angle_offsets[4])
+        ]
 
     @ti.kernel
     def render(self, t: ti.f32):
         """
-               Выполняет рендеринг изображения, вычисляя цвет каждого пикселя.
+        Рендерит шейдер в заданный момент времени.
 
-               Аргументы:
-                   t (ti.f32): Текущее время, используемое для анимаций.
+        Аргументы:
+            t (float): Текущее время.
         """
         for fragCoord in ti.grouped(self.pixels):
             uv = (fragCoord - 0.5 * self.resf) / self.resf.y
@@ -59,180 +160,49 @@ class BaseShader:
     @ti.func
     def main_image(self, uv, t):
         """
-                Вычисляет цвет для заданного пикселя.
+        Вычисляет цвет пикселя на основе его UV-координат и текущего времени.
 
-                Аргументы:
-                    uv (ts.vec2): Нормализованные координаты пикселя.
-                    t (float): Текущее время, используемое для анимаций.
+        Аргументы:
+            uv (ts.vec2): UV-координаты пикселя.
+            t (float): Текущее время.
 
-                Возвращает:
-                    ts.vec3: Вычисленный цвет пикселя.
+        Возвращает:
+            ts.vec3: Цвет пикселя.
         """
-        col = ts.vec3(0.0, 0.0, 0.0)  # Начальный цвет - черный
-
-
-        # Вычисление длины вектора uv (расстояние от центра экрана)
+        col = ts.vec3(0.0, 0.0, 0.0)
         dist = length(uv)
-
-        # Установите первую пару внутренних и внешних радиусов кольца
-        inner_radius_1 = 0.1
-        outer_radius_1 = 0.2
-
-        # Установите вторую пару внутренних и внешних радиусов кольца
-        inner_radius_2 = 0.2
-        outer_radius_2 = 0.3
-
-        # Установите третью пару внутренних и внешних радиусов кольца
-        inner_radius_3 = 0.3
-        outer_radius_3 = 0.4
-
-        # Установите четвертую пару внутренних и внешних радиусов кольца
-        inner_radius_4 = 0.4
-        outer_radius_4 = 0.5
-
-        # Установите пятую пару внутренних и внешних радиусов кольца (такой же, как у первого)
-        inner_radius_5 = 0.5
-        outer_radius_5 = 0.6
-
-        '''
-        
-        # Если расстояние между внутренним и внешним радиусом, меняем цвет в зависимости от времени
-        # Если расстояние между внутренним и внешним радиусом, меняем цвет в зависимости от времени
-        if inner_radius < dist < outer_radius:
-            # Используйте skewsin вместо sin для измененного эффекта синуса
-            # Меняем цвет в зависимости от времени t
-            col = ts.vec3(skewsin(t, 0.1), skewsin(t + 2, 0.1), skewsin(t + 4, 0.1))
-        else:
-            col = ts.vec3(0.0, 0.0, 0.0)  # Если расстояние за пределами кольца, устанавливаем цвет в черный
-        '''
-
-        # Вычисление угла относительно центра окружности
         angle = ti.atan2(uv.y, uv.x)
 
-        # Цвета для градиента в каждом сегменте
-        color_segment_1_start = ts.vec3(1.0, 0.0, 0.0)  # Красный
-        color_segment_1_end = ts.vec3(0.0, 0.0, 1.0)  # Синий
-
-        color_segment_2_start = ts.vec3(0.0, 1.0, 0.0)  # Зеленый
-        color_segment_2_end = ts.vec3(1.0, 1.0, 0.0)  # Желтый
-
-        color_segment_3_start = ts.vec3(1.0, 1.0, 1.0)  # Белый
-        color_segment_3_end = ts.vec3(0.0, 0.0, 0.0)  # Черный
-
-        color_segment_4_start = ts.vec3(0.0, 1.0, 1.0)  # Бирюзовый
-        color_segment_4_end = ts.vec3(1.0, 0.0, 1.0)  # Пурпурный
-
-        color_segment_5_start = ts.vec3(0.5, 0.5, 0.0)  # Оливковый
-        color_segment_5_end = ts.vec3(0.0, 0.5, 0.5)  # Бирюзово-зеленый
-
-        # Функция для плавного закругления границ сегментов
-        edge_smoothness = 0.02
-
-        # Плавное изменение прозрачности сегментов во времени через косинус
-        alpha = 0.5 + 0.5 * ti.cos(3 * t)  # Изменение амплитуды для мигания
-
-        # Проверка, находится ли точка внутри первого сегмента дуги
-        if inner_radius_1 < dist < outer_radius_1 and 0 + 1.2 * (t / 1.1) < angle < ti.pi * 2 + (t / 1.1):
-            # Вычисляем коэффициент интерполяции для градиента
-            gradient_factor = (angle - (0 + (t / 1.1))) / ((ti.pi * 2 + (t / 1.1)) - (0 + (t / 1.1)))
-            # Увеличиваем скорость изменения
-            gradient_factor *= 2
-            # Линейная интерполяция между начальным и конечным цветом сегмента
-            col = ts.mix(color_segment_1_start, color_segment_1_end, gradient_factor)
-            col *= smooth_edge(dist, inner_radius_1 - edge_smoothness,
-                               inner_radius_1)  # Плавный переход к внешнему радиусу
-            col *= smooth_edge(outer_radius_1 + edge_smoothness, dist, outer_radius_1)
-            col *= 0.5 + 0.5 * ti.cos(3 * (t + 0))  # Прозрачность для первого сегмента
-
-        # Проверка, находится ли точка внутри второго сегмента дуги
-        elif inner_radius_2 < dist < outer_radius_2 and -ti.pi + 1.3 * (t / 1.1) < angle < 0 + (t / 1.1):
-            # Вычисляем коэффициент интерполяции для градиента
-            gradient_factor = (angle - (-ti.pi + (t / 1.1))) / ((0 + (t / 1.1)) - (-ti.pi + (t / 1.1)))
-            # Увеличиваем скорость изменения
-            gradient_factor *= 2  # Например, умножим на 2
-            # Линейная интерполяция между начальным и конечным цветом сегмента
-            col = ts.mix(color_segment_2_start, color_segment_2_end, gradient_factor)
-            col *= smooth_edge(dist, inner_radius_2 - edge_smoothness, inner_radius_2)
-            col *= smooth_edge(outer_radius_2 + edge_smoothness, dist, outer_radius_2)
-            col *= 0.5 + 0.5 * ti.cos(3 * (t + 0.2))  # Прозрачность для второго сегмента
-
-        # Проверка, находится ли точка внутри третьего сегмента дуги
-        elif inner_radius_3 < dist < outer_radius_3 and -ti.pi / 2 + 1.4 * (t / 1.1) < angle < ti.pi / 2 + (t / 1.1):
-            # Вычисляем коэффициент интерполяции для градиента
-            gradient_factor = (angle - (-ti.pi / 2 + (t / 1.1))) / ((ti.pi / 2 + (t / 1.1)) - (-ti.pi / 2 + (t / 1.1)))
-            # Увеличиваем скорость изменения
-            gradient_factor *= 2  # Например, умножим на 2
-            # Линейная интерполяция между начальным и конечным цветом сегмента
-            col = ts.mix(color_segment_3_start, color_segment_3_end, gradient_factor)
-            col *= smooth_edge(dist, inner_radius_3 - edge_smoothness, inner_radius_3)
-            col *= smooth_edge(outer_radius_3 + edge_smoothness, dist, outer_radius_3)
-            col *= 0.5 + 0.5 * ti.cos(3 * (t + 0.4))  # Прозрачность для третьего сегмента
-        #
-        # Проверка, находится ли точка внутри четвертого сегмента дуги
-        if inner_radius_4 < dist < outer_radius_4 and -ti.pi + 1.4 * (t / 1.1) < angle < 0 + (t / 1.1):
-            # Вычисляем коэффициент интерполяции для градиента
-            gradient_factor = (angle - (-ti.pi / 2 + (t / 1.1))) / ((ti.pi / 2 + (t / 1.1)) - (-ti.pi / 2 + (t / 1.1)))
-            # Увеличиваем скорость изменения
-            gradient_factor *= 2  # Например, умножим на 2
-            # Линейная интерполяция между начальным и конечным цветом сегмента
-            col = ts.mix(color_segment_4_start, color_segment_4_end, gradient_factor)
-            col *= smooth_edge(dist, inner_radius_4 - edge_smoothness, inner_radius_4)
-            col *= smooth_edge(outer_radius_4 + edge_smoothness, dist, outer_radius_4)
-            col *= 0.5 + 0.5 * ti.cos(3 * (t + 0.6))  # Прозрачность для четвертого сегмента
-
-        # Проверка, находится ли точка внутри пятого сегмента дуги (такой же, как первый)
-        elif inner_radius_5 < dist < outer_radius_5 and -ti.pi + 1.2 * (t / 1.1) < angle < ti.pi + (t / 1.1):
-            gradient_factor = (angle - (-ti.pi + (t / 1.1))) / ((ti.pi + (t / 1.1)) - (-ti.pi + (t / 1.1)))
-            gradient_factor *= 2
-            col = ts.mix(color_segment_5_start, color_segment_5_end, gradient_factor)
-            col *= smooth_edge(dist, inner_radius_5 - edge_smoothness, inner_radius_5)
-            col *= smooth_edge(outer_radius_5 + edge_smoothness, dist, outer_radius_5)
-            col *= 0.5 + 0.5 * ti.cos(3 * (t + 0.8))  # Прозрачность для пятого сегмента
-
-        '''
-        elif not (inner_radius_1 < dist < outer_radius_1 and 0 + 1.2 * (t / 1.1) < angle < ti.pi * 2 + (t / 1.1)) and \
-                not (inner_radius_2 < dist < outer_radius_2 and -ti.pi + 1.2 * (t / 1.1) < angle < 0 + (t / 1.1)) and \
-                not (inner_radius_3 < dist < outer_radius_3 and -ti.pi / 2 + 1.2 * (t / 1.1) < angle < ti.pi / 2 + (t / 1.1)):
-            # Действия, выполняемые в случае, если угол не принадлежит ни одному промежутку
-            col = ts.vec3(0.0, 0.0, 0.0)  # Устанавливаем цвет в черный
-            t = 0
-        '''
-
-
-
+        for segment in ti.static(self.segments):
+            if segment.contains(dist, angle, t):
+                col = segment.get_color(dist, angle, t)
+                col *= 0.5 + 0.5 * ti.cos(3 * (t + segment.inner_radius))  # Прозрачность сегмента
 
         return col
 
     def main_loop(self):
         """
-               Основной цикл приложения, обрабатывающий события и рендеринг кадров.
+        Основной цикл шейдера, который обрабатывает рендеринг и события GUI.
         """
         gui = ti.GUI(self.title, res=self.res, fast_gui=True)
         start = time.time()
 
-        while gui.running:  # основной цикл
-            if gui.get_event(ti.GUI.PRESS):  # для закрытия приложения по нажатию на Esc
+        while gui.running:
+            if gui.get_event(ti.GUI.PRESS):
                 if gui.event.key == ti.GUI.ESCAPE:
                     break
 
-            t = time.time() - start  # пересчет времени, прошедшего с первого кадра
-            if t >= 5.8:  # Если прошло 5.6 секунд, сбросить время
-                start = time.time()  # Сбросить начальное время
-                t = 0  # Сбросить текущее время
-            self.render(t)  # расчет цветов пикселей
-            gui.set_image(self.pixels)  # перенос пикселей из поля pixels в буфер кадра
+            t = time.time() - start
+            if t >= 5.8:
+                start = time.time()
+                t = 0
+            self.render(t)
+            gui.set_image(self.pixels)
             gui.show()
 
         gui.close()
 
-# Окно и главный цикл
-
 if __name__ == "__main__":
-    """
-        Точка входа в приложение, инициализирующая Taichi и запускающая основной цикл.
-        """
     ti.init(arch=ti.opengl)
-
     shader = BaseShader("Base shader")
-
     shader.main_loop()
