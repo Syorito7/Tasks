@@ -88,6 +88,10 @@ class BaseShader:
         inner_radius_4 = 0.4
         outer_radius_4 = 0.5
 
+        # Установите пятую пару внутренних и внешних радиусов кольца (такой же, как у первого)
+        inner_radius_5 = 0.5
+        outer_radius_5 = 0.6
+
         '''
         
         # Если расстояние между внутренним и внешним радиусом, меняем цвет в зависимости от времени
@@ -115,6 +119,9 @@ class BaseShader:
 
         color_segment_4_start = ts.vec3(0.0, 1.0, 1.0)  # Бирюзовый
         color_segment_4_end = ts.vec3(1.0, 0.0, 1.0)  # Пурпурный
+
+        color_segment_5_start = ts.vec3(0.5, 0.5, 0.0)  # Оливковый
+        color_segment_5_end = ts.vec3(0.0, 0.5, 0.5)  # Бирюзово-зеленый
 
         # Функция для плавного закругления границ сегментов
         edge_smoothness = 0.02
@@ -164,15 +171,22 @@ class BaseShader:
             col *= smooth_edge(dist, inner_radius_4 - edge_smoothness, inner_radius_4)
             col *= smooth_edge(outer_radius_4 + edge_smoothness, dist, outer_radius_4)
 
+        # Проверка, находится ли точка внутри пятого сегмента дуги (такой же, как первый)
+        elif inner_radius_5 < dist < outer_radius_5 and -ti.pi + 1.2 * (t / 1.1) < angle < ti.pi + (t / 1.1):
+            gradient_factor = (angle - (-ti.pi + (t / 1.1))) / ((ti.pi + (t / 1.1)) - (-ti.pi + (t / 1.1)))
+            gradient_factor *= 2
+            col = ts.mix(color_segment_5_start, color_segment_5_end, gradient_factor)
+            col *= smooth_edge(dist, inner_radius_5 - edge_smoothness, inner_radius_5)
+            col *= smooth_edge(outer_radius_5 + edge_smoothness, dist, outer_radius_5)
 
-
-        #
+        '''
         elif not (inner_radius_1 < dist < outer_radius_1 and 0 + 1.2 * (t / 1.1) < angle < ti.pi * 2 + (t / 1.1)) and \
                 not (inner_radius_2 < dist < outer_radius_2 and -ti.pi + 1.2 * (t / 1.1) < angle < 0 + (t / 1.1)) and \
                 not (inner_radius_3 < dist < outer_radius_3 and -ti.pi / 2 + 1.2 * (t / 1.1) < angle < ti.pi / 2 + (t / 1.1)):
             # Действия, выполняемые в случае, если угол не принадлежит ни одному промежутку
             col = ts.vec3(0.0, 0.0, 0.0)  # Устанавливаем цвет в черный
             t = 0
+        '''
 
 
 
@@ -192,7 +206,7 @@ class BaseShader:
                     break
 
             t = time.time() - start  # пересчет времени, прошедшего с первого кадра
-            if t >= 5.6:  # Если прошло 5.6 секунд, сбросить время
+            if t >= 5.8:  # Если прошло 5.6 секунд, сбросить время
                 start = time.time()  # Сбросить начальное время
                 t = 0  # Сбросить текущее время
             self.render(t)  # расчет цветов пикселей
