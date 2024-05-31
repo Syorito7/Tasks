@@ -4,6 +4,65 @@ import time
 from core import length, skewsin, smooth_edge
 
 @ti.data_oriented
+class Circle:
+    """
+    Класс, представляющий окружность шейдера.
+
+    Атрибуты:
+        center (ts.vec2): Центр окружности.
+        radius (float): Радиус окружности.
+        start_color (ts.vec3): Начальный цвет окружности.
+        end_color (ts.vec3): Конечный цвет окружности.
+    """
+
+    def __init__(self, center, radius, start_color, end_color):
+        """
+        Инициализирует новую окружность.
+
+        Аргументы:
+            center (ts.vec2): Центр окружности.
+            radius (float): Радиус окружности.
+            start_color (ts.vec3): Начальный цвет окружности.
+            end_color (ts.vec3): Конечный цвет окружности.
+        """
+        self.center = center
+        self.radius = radius
+        self.start_color = start_color
+        self.end_color = end_color
+
+    @ti.func
+    def contains(self, uv):
+        """
+        Определяет, находится ли заданная точка (UV-координаты) внутри этой окружности.
+
+        Аргументы:
+            uv (ts.vec2): UV-координаты точки.
+
+        Возвращает:
+            bool: True, если точка находится внутри окружности, иначе False.
+        """
+        dist = length(uv - self.center)
+        return dist < self.radius
+
+    @ti.func
+    def get_color(self, uv):
+        """
+        Вычисляет цвет в заданной точке (UV-координаты) внутри окружности.
+
+        Аргументы:
+            uv (ts.vec2): UV-координаты точки.
+
+        Возвращает:
+            ts.vec3: Цвет в заданной точке.
+        """
+        dist = length(uv - self.center)
+        gradient_factor = dist / self.radius
+        color = ts.mix(self.start_color, self.end_color, gradient_factor)
+        edge_smoothness = 0.02
+        color *= smooth_edge(self.radius + edge_smoothness, dist, self.radius)
+        return color
+
+@ti.data_oriented
 class Segment:
     """
     Класс, представляющий сегмент шейдера.
