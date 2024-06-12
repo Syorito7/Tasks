@@ -40,4 +40,4 @@ ___
 ---
 ### Python
 - Using libraries aichi and tai chi_gslr for creating [shaders](https://github.com/Syorito7/Tasks/tree/main/HSE/Course_3/Computer%20Practicum%203/TEST_4)
-- 
+![Demonstration](https://github.com/Syorito7/Tasks/blob/main/HSE/Course_3/Computer%20Practicum%203/shaders.gif)
