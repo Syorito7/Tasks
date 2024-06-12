@@ -41,3 +41,9 @@ ___
 ### Python
 - Using libraries aichi and tai chi_gslr for creating [shaders](https://github.com/Syorito7/Tasks/tree/main/HSE/Course_3/Computer%20Practicum%203/TEST_4)
 ![Demonstration](https://github.com/Syorito7/Tasks/blob/main/HSE/Course_3/Computer%20Practicum%203/shaders.gif)
+### Database - SQL
+- Creating E-R diagrams, tables and writing base requests:
+- Commands:
+- SELECT, INSERT INTO, FROM, WHERE, INNER JOIN/JOIN, CONCAT
+![E-R diagrams](https://github.com/Syorito7/Tasks/blob/main/HSE/Course_3/Database/Laba_1/ER-%D0%B4%D0%B8%D0%B0%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B0%2C%20%D0%B2%D0%B0%D1%80%D0%B8%D0%B0%D0%BD%D1%82%2012-E-R%20%D0%B4%D0%B8%D0%B0%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B0%20-%20%D0%9A%D0%B0%D0%BD%D1%86%D0%B5%D0%BB%D1%8F%D1%80%D0%B8%D1%8F.jpg)
+
