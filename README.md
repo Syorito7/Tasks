@@ -34,3 +34,10 @@ ___
 - Description of classes, methods, functions, namespace written in C++ to generate documentation in html format
 - Using Graphviz utility to visualize classes and create UML diagrams for objects
 - An example based on the [Combination Circuit](https://github.com/vvzunin/CircuitGen_Generator) project
+---
+### CMake
+- Using Cmake to automatically install Doxygen and the Graphviz utility in a project [Combination Circuit](https://github.com/vvzunin/CircuitGen_Generator)
+---
+### Python
+- Using libraries aichi and tai chi_gslr for creating [shaders](https://github.com/Syorito7/Tasks/tree/main/HSE/Course_3/Computer%20Practicum%203/TEST_4)
+- 
