@@ -51,3 +51,6 @@ if __name__ == "__main__":
     username = "syorito7"
     profile_data = get_leetcode_profile(username)
     update_readme(profile_data)
+    
+    with open('README.md', 'r') as file:
+        print(file.read())
