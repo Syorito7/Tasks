@@ -5,6 +5,10 @@
 - [x] [Course 3](https://github.com/Syorito7/Tasks/tree/main/HSE/Course_3)
 - [ ] Course 4
 
+---
+<!-- LEETCODE_PROFILE_START -->
+<!-- LEETCODE_PROFILE_END -->
+
 ___
 ## Participation in projects
 - [x] [Protocol recognition](https://github.com/Alex-Karma/ML_Project/tree/main) and [Documentation](https://github.com/Syorito7/Tasks/tree/main/HSE/Course_1/My_project)
