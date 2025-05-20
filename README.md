@@ -35,7 +35,7 @@ ___
 - SFML
 - STL
 - [***Favorite project - Pacman***](https://github.com/Syorito7/Tasks/tree/main/HSE/Course_2/C%2B%2B/Laba_4)
-- [video pacman](https://github.com/Syorito7/Tasks/blob/main/HSE/Course_2/pacman_video.gif)
+- ![video pacman](https://github.com/Syorito7/Tasks/blob/main/HSE/Course_2/pacman_video.gif)
 ---
 ### Doxygen
 - Description of classes, methods, functions, namespace written in C++ to generate documentation in html format
