@@ -60,3 +60,15 @@ ___
 
 [![Telegram](https://img.shields.io/badge/Telegram-2CA5E0?style=flat&logo=telegram&logoColor=white)](https://t.me/Syorito7)
 [![Email](https://img.shields.io/badge/Email-D14836?style=flat&logo=gmail&logoColor=white)](mailto:naindyuchenko@edu.hse.ru)
+
+
+## 📈 Статистика изменений в репозитории
+
+![Commits](https://img.shields.io/github/commit-activity/m/Syorito7/Tasks)
+![Last Commit](https://img.shields.io/github/last-commit/Syorito7/Tasks)
+![Repo Size](https://img.shields.io/github/repo-size/Syorito7/Tasks)
+![Languages](https://img.shields.io/github/languages/top/Syorito7/Tasks)
+
+### 📊 График активности 
+
+![GitHub Activity Graphs](https://github-readme-activity-graph.vercel.app/graph?username=Syorito7&repo=Tasks&theme=github-compact&hide_border=true)
