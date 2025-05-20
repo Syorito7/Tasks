@@ -7,6 +7,9 @@
 
 ---
 <!-- LEETCODE_PROFILE_START -->
+## 📊 My LeetCode Stats
+
+![LeetCode Stats](https://leetcard.jacoblin.cool/syorito7?theme=dark&font=Karma&ext=contest)
 <!-- LEETCODE_PROFILE_END -->
 
 ___
@@ -14,7 +17,6 @@ ___
 - [x] [Protocol recognition](https://github.com/Alex-Karma/ML_Project/tree/main) and [Documentation](https://github.com/Syorito7/Tasks/tree/main/HSE/Course_1/My_project)
 - [x] [Combination Circuit Generator - version 2022/2023](https://git.miem.hse.ru/1290/1290_project)
 - [ ] [Combination Circuit Generator - version 2022/2024](https://github.com/vvzunin/CircuitGen_Generator)
-
 
 ---
 ## Achievements
@@ -50,4 +52,3 @@ ___
 - Commands:
 - SELECT, INSERT INTO, FROM, WHERE, INNER JOIN/JOIN, CONCAT
 ![E-R diagrams](https://github.com/Syorito7/Tasks/blob/main/HSE/Course_3/Database/Laba_1/ER-%D0%B4%D0%B8%D0%B0%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B0%2C%20%D0%B2%D0%B0%D1%80%D0%B8%D0%B0%D0%BD%D1%82%2012-E-R%20%D0%B4%D0%B8%D0%B0%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B0%20-%20%D0%9A%D0%B0%D0%BD%D1%86%D0%B5%D0%BB%D1%8F%D1%80%D0%B8%D1%8F.drawio.png)
-
