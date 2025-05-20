@@ -7,9 +7,12 @@
 
 ---
 <!-- LEETCODE_PROFILE_START -->
-## 📊 My LeetCode Stats
+## 📊 Статистика LeetCode
 
-![LeetCode Stats](https://leetcard.jacoblin.cool/syorito7?theme=dark&font=Karma&ext=contest)
+![LeetCode Stats](https://leetcard.jacoblin.cool/Syorito7?ext=contest&theme=dark&font=baloo)
+
+> 🔗 [Профиль на LeetCode](https://leetcode.com/Syorito7/)
+
 <!-- LEETCODE_PROFILE_END -->
 
 ___
