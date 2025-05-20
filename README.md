@@ -1,9 +1,15 @@
 # My Portfolio
 ## HSE
-- [x] [Course 1](https://github.com/Syorito7/Tasks/tree/main/HSE/Course_1)
-- [x] [Course 2](https://github.com/Syorito7/Tasks/tree/main/HSE/Course_2/C%2B%2B)
-- [x] [Course 3](https://github.com/Syorito7/Tasks/tree/main/HSE/Course_3)
-- [ ] Course 4
+- [x] [Course 1](https://github.com/Syorito7/Tasks/tree/main/HSE/Course_1) – базовые структуры данных и простые алгоритмы  
+  🧠 LeetCode: массивы, строки, хеш-таблицы
+
+- [x] [Course 2](https://github.com/Syorito7/Tasks/tree/main/HSE/Course_2/C%2B%2B) – алгоритмы и сложность, STL  
+  📈 LeetCode: сортировки, рекурсия, двоичный поиск
+
+- [x] [Course 3](https://github.com/Syorito7/Tasks/tree/main/HSE/Course_3) – алгоритмы на графах, динамическое программирование  
+  🌐 LeetCode: BFS, DFS, Dijkstra, DP
+
+- [ ] Course 4 – финальный проект и прикладные задачи  
 
 ---
 <!-- LEETCODE_PROFILE_START -->
