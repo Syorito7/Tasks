@@ -55,3 +55,8 @@ ___
 - SELECT, INSERT INTO, FROM, WHERE, INNER JOIN/JOIN, CONCAT
 ![E-R diagrams_1](https://github.com/Syorito7/Tasks/blob/main/HSE/Course_3/Database/Laba_1/ER-%D0%B4%D0%B8%D0%B0%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B0%2C%20%D0%B2%D0%B0%D1%80%D0%B8%D0%B0%D0%BD%D1%82%2012-E-R%20%D0%B4%D0%B8%D0%B0%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B0%20-%20%D0%9A%D0%B0%D0%BD%D1%86%D0%B5%D0%BB%D1%8F%D1%80%D0%B8%D1%8F.drawio.png)
 ![E-R diagrams_2](https://github.com/Syorito7/Tasks/blob/main/HSE/Course_3/Database/SQL_Example.png)
+
+## 📬 Контакты
+
+[![Telegram](https://img.shields.io/badge/Telegram-2CA5E0?style=flat&logo=telegram&logoColor=white)](https://t.me/Syorito7)
+[![Email](https://img.shields.io/badge/Email-D14836?style=flat&logo=gmail&logoColor=white)](mailto:naindyuchenko@edu.hse.ru)
