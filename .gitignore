@@ -4,11 +4,6 @@
 # Игнорировать CSV-файлы
 *.csv
 
-# Игнорировать папку node_modules
-node_modules/
-
-# Игнорировать настройки VSCode
-.vscode/
 
 # Игнорировать файлы проектов Visual Studio
 *.sln
