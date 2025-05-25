@@ -1,0 +1,20 @@
+# Игнорировать лог-файлы
+*.log
+
+# Игнорировать CSV-файлы
+*.csv
+
+# Игнорировать папку node_modules
+node_modules/
+
+# Игнорировать настройки VSCode
+.vscode/
+
+# Игнорировать файлы проектов Visual Studio
+*.sln
+*.pdp
+*.user
+*.filters
+*.vcxproj
+*.idp
+*.tlog
