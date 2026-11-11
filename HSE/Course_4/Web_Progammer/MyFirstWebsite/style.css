@@ -1,9 +1,342 @@
-body {
-  background-color: #f0f0f0;
-  font-family: Arial, sans-serif;
-  text-align: center;
+/* =========================
+   1. Общие настройки
+========================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-h1 {
-  color: blue;
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f7fb;
+  color: #20243a;
+  line-height: 1.6;
+}
+
+/* =========================
+   2. Навигация
+========================= */
+
+.header {
+  background-color: #20243a;
+
+  padding: 20px 8%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  color: white;
+  font-size: 26px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.navigation {
+  display: flex;
+  gap: 30px;
+}
+
+.navigation a {
+  color: #d9dce8;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.navigation a:hover {
+  color: #70a5ff;
+}
+
+/* =========================
+   3. Главный экран
+========================= */
+
+.hero {
+  min-height: 500px;
+
+  padding: 80px 8%;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 50px;
+}
+
+.hero-content {
+  max-width: 600px;
+}
+
+.subtitle {
+  color: #477bea;
+  font-weight: bold;
+  letter-spacing: 3px;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  font-size: 48px;
+  line-height: 1.2;
+  margin-bottom: 25px;
+}
+
+.hero h1 span {
+  color: #477bea;
+}
+
+.hero-description {
+  color: #626779;
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+/* Кнопки */
+
+.hero-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.button {
+  padding: 12px 25px;
+  border-radius: 8px;
+
+  text-decoration: none;
+  font-weight: bold;
+
+  transition: 0.3s;
+}
+
+.primary {
+  background-color: #477bea;
+  color: white;
+}
+
+.primary:hover {
+  background-color: #315fc0;
+}
+
+.secondary {
+  border: 2px solid #477bea;
+  color: #477bea;
+}
+
+.secondary:hover {
+  background-color: #477bea;
+  color: white;
+}
+
+/* Декоративный блок */
+
+.hero-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-placeholder {
+  width: 250px;
+  height: 250px;
+
+  background: linear-gradient(135deg, #477bea, #8c69e8);
+
+  border-radius: 30px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: white;
+  font-size: 80px;
+  font-weight: bold;
+
+  box-shadow: 0 15px 40px rgba(71, 123, 234, 0.25);
+}
+
+/* =========================
+   4. Общие секции
+========================= */
+
+.section {
+  padding: 70px 8%;
+}
+
+.section h2 {
+  font-size: 32px;
+  margin-bottom: 30px;
+}
+
+.section p {
+  color: #626779;
+  font-size: 17px;
+  max-width: 750px;
+}
+
+/* =========================
+   5. Навыки
+========================= */
+
+.skills-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.skill {
+  background-color: white;
+
+  padding: 12px 25px;
+
+  border-radius: 10px;
+
+  color: #477bea;
+  font-weight: bold;
+
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+}
+
+/* =========================
+   6. Проекты
+========================= */
+
+.projects-container {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 25px;
+}
+
+.project-card {
+  background-color: white;
+
+  padding: 30px;
+
+  border-radius: 15px;
+
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.04);
+
+  transition: 0.3s;
+}
+
+.project-card:hover {
+  transform: translateY(-7px);
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.project-card h3 {
+  margin-bottom: 15px;
+  font-size: 21px;
+}
+
+.project-card p {
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+
+.project-card span {
+  display: block;
+
+  color: #477bea;
+  font-size: 13px;
+
+  margin-bottom: 20px;
+}
+
+.project-card a {
+  color: #20243a;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.project-card a:hover {
+  color: #477bea;
+}
+
+/* =========================
+   7. Контакты
+========================= */
+
+.contacts {
+  background-color: #e9eef9;
+}
+
+.contacts p {
+  margin-bottom: 20px;
+}
+
+.contacts a {
+  color: #477bea;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* =========================
+   8. Подвал
+========================= */
+
+footer {
+  background-color: #20243a;
+
+  color: white;
+  text-align: center;
+
+  padding: 25px;
+}
+
+/* =========================
+   9. Адаптация под смартфоны
+========================= */
+
+@media (max-width: 850px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
+
+  .projects-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .header {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .navigation {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .hero h1 {
+    font-size: 34px;
+  }
+
+  .hero-image {
+    display: none;
+  }
+
+  .projects-container {
+    grid-template-columns: 1fr;
+  }
+
+  .section {
+    padding: 45px 6%;
+  }
 }

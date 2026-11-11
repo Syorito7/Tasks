@@ -2,11 +2,142 @@
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
-    <title>Мой первый сайт</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Моё портфолио | Разработчик</title>
+
     <link rel="stylesheet" href="style.css" />
   </head>
+
   <body>
-    <h1>Привет, мир!</h1>
-    <p>Мой первый веб-сайт.</p>
+    <!-- Навигация -->
+    <header class="header">
+      <a href="#" class="logo">Portfolio.</a>
+
+      <nav class="navigation">
+        <a href="#about">Обо мне</a>
+        <a href="#skills">Навыки</a>
+        <a href="#projects">Проекты</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+    </header>
+
+    <!-- Главный экран -->
+    <main>
+      <section class="hero">
+        <div class="hero-content">
+          <p class="subtitle">ПРИВЕТ, Я РАЗРАБОТЧИК</p>
+
+          <h1>
+            Создаю проекты,
+            <span>изучаю технологии</span>
+            и решаю задачи.
+          </h1>
+
+          <p class="hero-description">
+            Студент прикладной математики. Интересуюсь программированием,
+            машинным обучением и веб-разработкой.
+          </p>
+
+          <div class="hero-buttons">
+            <a href="#projects" class="button primary"> Мои проекты </a>
+
+            <a href="#contacts" class="button secondary"> Связаться </a>
+          </div>
+        </div>
+
+        <div class="hero-image">
+          <div class="image-placeholder">&lt;/&gt;</div>
+        </div>
+      </section>
+
+      <!-- Обо мне -->
+      <section id="about" class="section">
+        <h2>Обо мне</h2>
+
+        <p>
+          Я изучаю прикладную математику и программирование. Мне интересны
+          алгоритмы, анализ данных, машинное обучение и разработка программного
+          обеспечения.
+        </p>
+      </section>
+
+      <!-- Навыки -->
+      <section id="skills" class="section">
+        <h2>Мои навыки</h2>
+
+        <div class="skills-container">
+          <div class="skill">Python</div>
+          <div class="skill">C++</div>
+          <div class="skill">SQL</div>
+          <div class="skill">HTML</div>
+          <div class="skill">CSS</div>
+          <div class="skill">Machine Learning</div>
+        </div>
+      </section>
+
+      <!-- Проекты -->
+      <section id="projects" class="section">
+        <h2>Мои проекты</h2>
+
+        <div class="projects-container">
+          <article class="project-card">
+            <h3>PINN Research</h3>
+
+            <p>
+              Исследование нейронных сетей, основанных на физических законах,
+              для моделирования процессов волочения.
+            </p>
+
+            <span>Python · Machine Learning · PINNs</span>
+
+            <a href="https://github.com/Syorito7" target="_blank"> GitHub → </a>
+          </article>
+
+          <article class="project-card">
+            <h3>CDEK Salary Monitor</h3>
+
+            <p>Проект мониторинга зарплатных предложений и анализа вакансий.</p>
+
+            <span>C++ · Python · SQL</span>
+
+            <a
+              href="https://github.com/Syorito7/CDEK_salary_monitor"
+              target="_blank"
+            >
+              GitHub →
+            </a>
+          </article>
+
+          <article class="project-card">
+            <h3>Protocol Recognition</h3>
+
+            <p>
+              Проект машинного обучения для распознавания сетевых протоколов.
+            </p>
+
+            <span>Python · Machine Learning</span>
+
+            <a href="https://github.com/Alex-Karma/ML_Project" target="_blank">
+              GitHub →
+            </a>
+          </article>
+        </div>
+      </section>
+
+      <!-- Контакты -->
+      <section id="contacts" class="section contacts">
+        <h2>Контакты</h2>
+
+        <p>Буду рад новым проектам и интересному сотрудничеству.</p>
+
+        <a href="https://github.com/Syorito7" target="_blank"> GitHub </a>
+      </section>
+    </main>
+
+    <!-- Подвал -->
+    <footer>
+      <p>© 2026 Моё портфолио</p>
+    </footer>
   </body>
 </html>
